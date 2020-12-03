@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Day 5 | Blurry loading</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0
+        }
+        main {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/1062269/pexels-photo-1062269.jpeg') no-repeat 50% 50% / cover;
+            z-index: 0;
+        }
+        p {
+            position: relative;
+            font-family: monospace;
+            font-size: 5rem;
+            color: #fff;
+            z-index: 5;
+            transition: opacity 1s;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/blurry-loading/-->
+        <main>
+            <div id="loading"></div>
+            <p id="pourcentage">0%</p>
+        </main>
+    </body>
+    <script>
+    const bg = document.getElementById('loading'),
+        p = document.getElementById('pourcentage')
+
+    let v = 0,
+        x = 100,
+        int = setInterval(blur, 30);
+
+    function blur() {
+        v++;
+        x--;
+        if(v > 99) {
+            clearInterval(int)
+            p.style.opacity = '0'
+        }
+        p.innerHTML = `${v}%`;
+        bg.style.filter = `blur(${x/4}px)`
+    }
+    
+    </script>
+</html>
