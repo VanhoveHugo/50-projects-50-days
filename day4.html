@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Day 4 | Hidden search</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        :root {
+            --size: 40px
+        }
+        * {
+            margin: 0;
+            outline: none;
+        }
+        body {
+            background: darkolivegreen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+        }
+        #container {
+            position: relative;
+            width: var(--size);
+            height: 40px;
+            border-radius: 50px;
+            overflow: hidden;
+            transition: width 400ms;
+            border: 5px solid #000;
+        }
+        input {
+            width: 160px;
+            height: 40px;
+            background: #fff;
+            border: none;
+            padding: 0 1rem;
+            font-family: monospace;
+            font-weight: bold;
+            z-index: 0;
+        }
+        label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            z-index: 5;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/hidden-search-widget/-->
+        <div id='container'>
+            <input id="search" type="text" placeholder="Search...">
+            <label id="button" for="search"><i class="fa fa-search" aria-hidden="true"></i></label>
+        </div>
+    </body>
+    <script>
+        const button = document.getElementById('button');
+
+        let v = false;
+
+        button.onclick = () => {
+            if(v == false) {
+                document.getElementById('search').removeAttribute("disabled");
+                document.documentElement.style.setProperty('--size', "200px");
+                v = true
+            } else {
+                document.getElementById('search').value = "";
+                document.getElementById('search').setAttribute("disabled", "");
+                document.documentElement.style.setProperty('--size', "40px");
+                v = false
+            }
+        }
+
+    </script>
+</html>
