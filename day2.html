@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <title>Day 2 | Progress steps</title>
+    </head>
+    <style>
+        :root {
+            --size: 0%;
+        }
+        * {
+            outline: none;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: monospace;
+            background: lightyellow;
+        }
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        #container {
+            position: relative;
+            width: 20%;
+            display: flex;
+            justify-content: space-between;
+        }
+        #container::before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 4px;
+            background: gray;
+            z-index: 0;
+        }
+        #container::after {
+            position: absolute;
+            content: "";
+            width: var(--size);
+            height: 4px;
+            background: #000;
+            transition: width 1s;
+            z-index: 1;
+        }
+        #container p {
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 50%;
+            border: 4px solid gray;
+            font-weight: bold;
+            color: gray;
+            background: #fff;
+            cursor: default;
+            z-index: 3;
+            transition: border 1s;
+        }
+        #container p.active {
+            border: 4px solid #000;
+            color: #000;
+        }
+        #buttons button {
+            margin: 1rem;
+            border-radius: 5px;
+            padding: .5rem 1rem;
+            color: #fff;
+            background: gray;
+            border: none;
+            cursor: no-drop;
+        }
+        #buttons button.active {
+            background: lightseagreen;
+            cursor: pointer;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/progress-steps/-->
+        <div id="container">
+            <p class="active">1</p>
+            <p id="two">2</p>
+            <p id="three">3</p>
+            <p id="four">4</p>
+        </div>
+        <div id="buttons">
+            <button id="prev">Prev</button>
+            <button id="next" class="active">Next</button>
+        </div>
+    </body>
+    <script>
+        let next = document.getElementById('next'),
+            prev = document.getElementById('prev'),
+            step = 1;
+
+        prev.onclick = () => {
+            if(step > 1) {
+                if(step == 2) {
+                    document.documentElement.style.setProperty('--size', "0%");
+                    document.getElementById('two').classList.remove('active')
+                }else if(step == 3) {
+                    document.documentElement.style.setProperty('--size', "33%");
+                    document.getElementById('three').classList.remove('active')
+                }else if(step == 4) {
+                    document.documentElement.style.setProperty('--size', "66%");
+                    document.getElementById('four').classList.remove('active')
+                }
+                step--;
+            }     
+            update();  
+        }
+        next.onclick = () => {
+            if(step < 4) {
+                document.documentElement.style.setProperty('--size', "calc("+ step * 33 +"%)");
+                step++;
+            } 
+            update();    
+        }
+        function update() {
+            if(step > 1) {
+                prev.classList.add('active');
+            } else {
+                prev.classList.remove('active')
+            }
+            if(step < 4) {
+                next.classList.add('active');
+            } else {
+                next.classList.remove('active')
+            }
+            if(step == 2) {
+                document.getElementById('two').classList.add('active')
+            }else if(step == 3) {
+                document.getElementById('three').classList.add('active')
+            }else if(step == 4) {
+                document.getElementById('four').classList.add('active')
+            }
+        }
+    </script>
+</html>
