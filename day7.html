@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title>Day 5 | Scroll animation</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: row;
+        }
+        article {
+            position: relative;
+            flex: 1;
+            transition: 1s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        article:hover {
+            flex: 2;
+        }
+        article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: black;
+            opacity: .5;
+        }
+        article p {
+            position: relative;
+            font-size: 5rem;
+            font-family: monospace;
+            color: #fff;
+            margin: 2rem 0;
+            z-index: 10;
+        }
+        article button {
+            padding: 1rem 2rem;
+            color: #fff;
+            font-size: 2rem;
+            background: transparent;
+            font-weight: bold;
+            border: 2px solid #fff;
+            font-family: monospace;
+            letter-spacing: .1rem;
+            text-transform: uppercase;
+            z-index: 10;
+            transition: 200ms;
+        }
+        article button:hover {
+            background: #fff;
+            color: #000;
+        }
+        #ps5 {
+            background: url("https://images.frandroid.com/wp-content/uploads/2020/06/sony-playstation-5-design-images-officielles-6.jpg") no-repeat right center/cover;
+        }
+        #xbox {
+            background: url("https://i.ytimg.com/vi/0tUqIHwHDEc/maxresdefault.jpg") no-repeat left center/cover;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/split-landing-page/-->
+        <article id="ps5">
+            <p>Playstation 5</p>
+            <button>Buy now</button>
+        </article>
+        <article id="xbox">
+            <p>XBox Series X</p>
+            <button>Buy now</button>
+        </article>
+    </body>
+    <script>
+        const boxes = document.querySelectorAll('.box');
+
+        window.addEventListener('scroll', checkBoxes)
+
+        checkBoxes()
+
+        function checkBoxes() {
+            const triggerBottom = window.innerHeight / 5 * 4
+
+            boxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top
+
+                if(boxTop < triggerBottom) {
+                    box.classList.add('show')
+                } else {
+                    box.classList.remove('show')
+                }
+            })
+        }
+    </script>
+</html>
