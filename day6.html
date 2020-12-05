@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Day 5 | Scroll animation</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        p {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        article {
+            background: lightcoral;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            font-family: monospace;
+            font-weight: bold;
+            color: #fff;
+            font-size: 3rem;
+            height: 200px;
+            width: 400px;
+            margin: 20px;
+            transition: 1s;
+        }
+        article:nth-child(1n+2) {
+            transform: translate(-2000px);
+        }
+        article:nth-child(2n+2) {
+            transform: translate(2000px);
+        }
+        article.show {
+            transform: translate(0);
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/scroll-animation/-->
+        <main>
+            <p>Scroll to see the animation</p>
+            <article class="box">Article #1</article>
+            <article class="box">Article #2</article>
+            <article class="box">Article #3</article>
+            <article class="box">Article #4</article>
+            <article class="box">Article #5</article>
+            <article class="box">Article #6</article>
+            <article class="box">Article #7</article>
+            <article class="box">Article #8</article>
+            <article class="box">Article #9</article>
+            <article class="box">Article #10</article>
+            <article class="box">Article #11</article>
+            <article class="box">Article #12</article>
+            <article class="box">Article #13</article>
+        </main>
+    </body>
+    <script>
+        const boxes = document.querySelectorAll('.box')
+
+        window.addEventListener('scroll', checkBoxes)
+
+        checkBoxes()
+
+        function checkBoxes() {
+            const triggerBottom = window.innerHeight / 5 * 4
+
+            boxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top
+
+                if(boxTop < triggerBottom) {
+                    box.classList.add('show')
+                } else {
+                    box.classList.remove('show')
+                }
+            })
+        }
+    </script>
+</html>
