@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>Day 8 | Form wave</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+            font-family: monospace;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: plum;
+        }
+        form {
+            padding: 3rem 2rem;
+            background: palevioletred;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+        }
+        input {
+            position: relative;
+            margin: 2rem 0;
+            background: none;
+            border: none;
+            border-bottom: 2px solid #fff;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            width: 100%;
+            z-index: 10;
+        }
+        ::placeholder {
+            color: #fff;
+            font-weight: 500;
+        }
+        button {
+            border-radius: 5px;
+            background: rgba(255, 255, 255, .2);
+            border: none;
+            padding: 1rem 1.5rem;
+            color: inherit;
+        }
+        button:active {
+            transform: scale(.98);
+        }
+        p {
+            margin: 1rem;
+        }
+        p a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 200;
+            border-bottom: 1px solid #fff;
+        }
+        section {
+            position: relative;
+        }
+        label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 3rem 0;
+            font-size: 1.2rem;
+            opacity: 1;
+            transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 5;
+        }
+        input:focus ~ label span, input:valid ~ label span{
+            opacity: 0;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/form-wave/-->
+        <form action="#">
+            <h1>Connectez-vous</h1>
+            <section>
+                <input id="email" type="text" required>
+                <label name="label" for="email">Email</label>
+            </section>
+            <section>
+                <input id="mdp" type="text" required>
+                <label name="label" for="mdp">Mot de passe</label>
+            </section>
+            <button type="submit">Se connecter</button>
+            <p>Si vous n'avez pas de compte ? <a href="#">S'enregistrer</a></p>
+        </form>
+    </body>
+    <script>
+        const labels = document.getElementsByName('label');
+
+        labels.forEach(label => {
+            label.innerHTML = label.innerText
+                .split('')
+                .map((letter, idx) => `<span style="transition-delay:${idx * 50}ms">${letter}</span>`)
+                .join('')
+        })
+    </script>
+</html>
