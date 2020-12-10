@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Day 9 | Sound board</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+        }
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+        }
+        .btn {
+            margin: 1rem;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            border: none;
+            background: bisque;
+            color: #000;
+            font-weight: bold;
+            font-size: 2rem;
+            font-family: monospace;
+            cursor: pointer;
+        }
+        .btn:active {
+            transform: scale(.98);
+        }
+    </style>
+    <body id="body">
+        <!--Template: https://50projects50days.com/projects/sound-board/-->
+        
+        <audio id="Applaudissement" src="https://50projects50days.com/projects/sound-board/sounds/applause.mp3"></audio>
+        <audio id="Bouuh" src="https://50projects50days.com/projects/sound-board/sounds/boo.mp3"></audio>
+        <audio id="Surpris" src="https://50projects50days.com/projects/sound-board/sounds/gasp.mp3"></audio>
+        <audio id="Tadaaa" src="https://50projects50days.com/projects/sound-board/sounds/tada.mp3"></audio>
+        <audio id="Victoire" src="https://50projects50days.com/projects/sound-board/sounds/victory.mp3"></audio>
+        <audio id="Faux !" src="https://50projects50days.com/projects/sound-board/sounds/wrong.mp3"></audio>
+    </body>
+    <script>
+        const sounds = ['Applaudissement', 'Bouuh', 'Surpris', 'Tadaaa', 'Victoire', 'Faux !']
+
+        sounds.forEach(s => {
+            const btn = document.createElement('button')
+            btn.classList.add('btn')
+
+            btn.innerText = s
+
+            btn.addEventListener('click', () => {
+                stopSongs()
+
+                document.getElementById(s).play()
+            })
+
+            document.getElementById('body').appendChild(btn)
+        })
+
+        function stopSongs() {
+            sounds.forEach(s => {
+                const son = document.getElementById(s)
+
+                son.pause()
+                son.currentTime = 0;
+            })
+        }
+    </script>
+</html>
