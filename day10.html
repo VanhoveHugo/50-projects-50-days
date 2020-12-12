@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Day 10 | Dad jokes</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+        }
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: palevioletred;
+        }
+        #container {
+            width: 50%;
+            border-radius: 10px;
+            background: #fff;
+            padding: 5vh 5vw;
+            font-family: monospace;
+            text-align: center;
+        }
+        h1 {
+            color: #555;
+        }
+        h2 {
+            color: #777;
+        }
+        p {
+            margin: 2rem 0;
+            font-size: 1.5rem;
+        }
+        button {
+            font-family: monospace;
+            border: none;
+            background: lightcoral;
+            color: #fff;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            padding: .5rem 1rem;
+            cursor: pointer;
+            transition: 100ms;
+        }
+        button:active {
+            transform: scale(.98);
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/dad-jokes/-->
+
+        <div id="container">
+            <h1>Essayer de ne pas rire</h1>
+            <h2>Api en anglais 😭</h2>
+            <p id='joke'>Bib Bib Boub... Loading</p>
+            <button id="button">Une autre blague</button>
+        </div>
+    </body>
+    <script>
+        const text = document.getElementById('joke');
+        const button = document.getElementById('button');
+
+        button.addEventListener('click', generateJoke)
+
+        generateJoke();
+
+        function generateJoke() {
+            const config = {
+                headers: {
+                    Accept: 'application/json',
+                }
+            }
+
+            fetch('https://icanhazdadjoke.com', config)
+                .then((res) => res.json())
+                .then((v) => {
+                    text.innerHTML = v.joke 
+                })
+        }
+    </script>
+</html>
