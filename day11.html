@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Day 11 | Dad jokes</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+            font-family: monospace;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #container {
+            display: flex;
+            flex-direction: row;
+        }
+        .box {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+
+            min-width: 150px;
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #000;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .box p {
+            position: absolute;
+            top: -2rem;
+            font-weight: 500;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/event-keycodes/-->
+
+        <div id="container">
+            <div class='box'>
+                Cliquer sur une touche pour savoir les codes
+            </div>
+        </div>
+    </body>
+    <script>
+        const text = document.getElementById('container');
+
+        window.addEventListener('keydown', (e) => {
+            text.innerHTML = `
+            <div class='box'>
+                ${e.key === ' ' ? 'space' : e.key}
+                <p>event.key</p>
+            </div>
+
+            <div class='box'>
+                ${e.keyCode}
+                <p>event.keyCode</p>
+            </div>
+            
+            <div class='box'>
+                ${e.code}
+                <p>event.code</p>
+            </div>
+            `
+        })
+    </script>
+</html>
