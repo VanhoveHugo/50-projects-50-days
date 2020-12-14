@@ -1,0 +1,159 @@
+<html>
+    <head>
+        <title>Day 12 | FAQ</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #eee;
+            padding: 5vh 5vw;
+        }
+
+        h1,h2,h3,p {
+            font-family: monospace;
+            margin: 1rem 0;
+        }
+        i {
+            color: #222;
+            cursor: pointer;
+        }
+        i:hover {
+            transform: scale(1.1);
+        }
+        article {
+            width: 40%;
+            height: 75px;
+            padding: 1rem 2rem;
+            margin: .5rem 0;
+            border-radius: 10px;
+            border: 1px solid #aaa;
+            overflow: hidden;
+            transition: 200ms;
+        }
+        article div {
+            width: 100%;
+            height: 75px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        article h2 {
+            font-weight: 500;
+            font-size: 1.4rem;
+        }
+        article p {
+            margin-top: 1rem;
+            width: 90%;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+        article.active {
+            height: auto;
+            background: #fff;
+        }
+        button {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+        }
+        article #open {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            transition: 500ms;
+        }
+        article.active #open {
+            opacity: 0;
+            z-index: -50;
+            transform: rotate(180deg);
+        }
+        article #close {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            transform: rotate(180deg);
+            transition: 500ms;
+        }
+        article.active #close {
+            display: flex;
+            transform: rotate(0);
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/faq-collapse/-->
+        
+        <h1>Frequently Asked Questions</h1>
+        <h3>Questions Fréquemment Posées</h3>
+        <article>
+            <div>
+                <h2>Pourquoi ne devrions-nous pas nous faire confiance?</h2>
+                <button class="faq-toggle">
+                    <i id="open" class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i>
+                    <i id="close" class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p>Nous faisons tous maison</p>
+        </article>
+        <article>
+            <div>
+                <h2>Comment appelle-t-on quelqu'un sans corps et sans nez?</h2>
+                <button class="faq-toggle">
+                    <i id="open" class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i>
+                    <i id="close" class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p>Personne ne sait.</p>
+        </article>
+        <article>
+            <div>
+                <h2>Quelle est la manière orientée objet de devenir riche?</h2>
+                <button class="faq-toggle">
+                    <i id="open" class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i>
+                    <i id="close" class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p>Héritage.</p>
+        </article>
+        <article>
+            <div>
+                <h2>Combien de chatouilles faut-il pour chatouiller une pieuvre?</h2>
+                <button class="faq-toggle">
+                    <i id="open" class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i>
+                    <i id="close" class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p>Dix chatouilles! car en anglais: ten tickles!</p>
+        </article>
+        <article>
+            <div>
+                <h2>Combien font 1+1?</h2>
+                <button class="faq-toggle">
+                    <i id="open" class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i>
+                    <i id="close" class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p>Cela dépend de qui demandez-vous.</p>
+        </article>
+    </body>
+    <script>
+        const toggles = document.querySelectorAll('.faq-toggle')
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.parentNode.parentNode.classList.toggle('active')
+            })
+        })
+    </script>
+</html>
