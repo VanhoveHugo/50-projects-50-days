@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <title>Day 13 | Random choice picker</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+            font-family: monospace;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+            background: lightskyblue;
+        }
+        h1 {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        h1 code {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 0;
+            width: 20px;
+            height: 20px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        textarea {
+            line-height: 20px;
+            padding: 10px;
+            margin: 20px 0;
+            resize: none;
+            border: none;
+        }
+        #liste {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+        }
+        span {
+            margin: 5px;
+            border: 2px solid #000;
+            padding: 1rem 2rem;
+            background: #fff;
+            font-weight: bold;
+            font-family: monospace;
+            border-radius: 50px;
+        }
+        .win {
+            background: chartreuse;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/random-choice-picker/-->
+
+        <h1>Entrer vos différents choix et séparer les avec une virgule <code>,</code>
+            <br>Appuyer sur entrer pour lancer la roulette</h1>
+        <textarea id="textarea" rows='4' cols="80" placeholder="Entrer vos différents choix..."></textarea>
+        <div id="liste">
+
+        </div>
+    </body>
+    <script>
+        const area = document.getElementById('textarea');
+        const ul = document.getElementById('liste');
+
+        area.focus()
+
+        area.addEventListener('keyup', e => {
+            createSelection(e.target.value)
+            if(e.key === 'Enter') {
+                setTimeout(() => {
+                    e.target.value = ''
+                }, 10)
+
+                randomSelect()
+            }
+        })
+
+        function createSelection(v) {
+            const arr = v.split(',').filter(tag => tag.trim() !== '').map(tag => tag.trim())
+            
+            ul.innerHTML = ''
+
+            arr.forEach(e => {
+                const elm = document.createElement('span')
+                elm.classList.add('tag')
+                elm.innerText = e
+                ul.appendChild(elm)
+            });
+            
+        }
+
+        function randomSelect() {
+            const timer = 30;
+            const interval = setInterval(() => {
+                const randomTag = pickRandomTag()
+
+                highlightTag(randomTag)
+
+                setTimeout(() => {
+                    unHighlightTag(randomTag)
+                }, 100)
+            }, 100);
+            setTimeout(() => {
+                clearInterval(interval)
+
+                setTimeout(() => {
+                    const random = pickRandomTag()
+
+                    highlightTag(random)
+                }, 100)
+            }, timer * 100)
+        }
+
+        
+        function pickRandomTag() {
+            const tags = document.querySelectorAll('.tag')
+            return tags[Math.floor(Math.random() * tags.length)]
+        }
+
+        function highlightTag(tag) {
+            tag.classList.add('win')
+        }
+
+        function unHighlightTag(tag) {
+            tag.classList.remove('win')
+        }
+    </script>
+</html>
