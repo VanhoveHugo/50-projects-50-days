@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>Day 14 | Animated navigation</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+            font-family: monospace;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+            color: sienna;
+            background: linear-gradient(to bottom, lightblue 0%, lightblue 50%, sienna 50%, sienna 100%);
+        }
+        nav {
+            position: relative;
+            width: 290;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            background: #fff;
+            padding: 0 calc(.5rem + 60px) 0 .5rem;
+            transition: 500ms;
+            box-shadow: 0 0 5px .5px #000;
+        }
+        nav.active {width: 0}
+        nav.active a {opacity: 0}
+        a {
+            display: flex;
+            align-items: center;
+            height: 60px;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            padding: 0 .5rem;
+            transition: 100ms;
+        }
+        a:hover {
+            background: #eee;
+        }
+        #button {
+            position: absolute;
+            right: .5rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        #button g {
+            top: calc(50% - 5%);
+            left: calc(50% - 16%);
+        }
+        #button g:last-child {
+            transform: rotate(45deg);        
+        }
+        #button g:first-child {
+            transform: rotate(-45deg);
+        }
+        g {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            width: 20px;
+            height: 3px;
+            background: black;
+            border-radius: 50px;
+            transition: 200ms;
+        }
+        .active #button g:first-child {
+            top: calc(50% - 10%);
+            transform: rotate(0);
+        }
+        .active #button g:last-child {
+            top: calc(50%);
+            transform: rotate(0);
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/random-choice-picker/-->
+
+        <nav>
+            <a href="#home">Accueil</a>
+            <a href="#lab">Laboratoire</a>
+            <a href="#about">A propos</a>
+            <a href="#contact">Contact</a>
+            <div id="button">
+                <g></g>
+                <g></g>
+            </div>
+        </nav>
+    </body>
+    <script>
+        const btn = document.getElementById('button');
+        let db = false;
+        btn.onclick = () => {
+            if(db==false) {
+                db = true
+                btn.parentNode.classList.add('active')
+            } else {
+                db= false
+                btn.parentNode.classList.remove('active')
+            }
+        }
+    </script>
+</html>
