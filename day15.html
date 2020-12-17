@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Day 15 | Incrementing counter</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+            font-family: monospace;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: row;
+            color: white;
+            background: brown;
+        }
+        article {
+            margin: 0 50px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 4rem;
+            margin: 2rem 0 1rem;
+            font-weight: 500;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/incrementing-counter/-->
+
+        <article>
+            <i class="fa fa-twitter fa-4x" aria-hidden="true"></i>
+            <h1 class='counter' data-value='805940'></h1>
+            <h2>Twitter Followers</h2>
+        </article>
+        <article>
+            <i class="fa fa-youtube-play fa-4x" aria-hidden="true"></i>
+            <h1 class='counter' data-value='54474'></h1>
+            <h2>Youtube Subscribers</h2>
+        </article>
+        <article>
+            <i class="fa fa-facebook-square fa-4x" aria-hidden="true"></i>
+            <h1 class='counter' data-value='5948'></h1>
+            <h2>Facebook Fans</h2>
+        </article>
+        
+    </body>
+    <script>
+        const counters = document.querySelectorAll('.counter')
+
+        counters.forEach(counter => {
+            counter.innerText = '0'
+
+            const updateCounter = () => {
+                const target = +counter.getAttribute('data-value')
+                const c = +counter.innerText
+
+                const increment = target / 200
+
+                if(c < target) {
+                    counter.innerText = `${Math.ceil(c + increment)}`
+                    setTimeout(updateCounter, 10)
+                } else {
+                    counter.innerText = target
+                }
+            }
+
+            updateCounter()
+        })
+    </script>
+</html>
