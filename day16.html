@@ -1,0 +1,203 @@
+<html>
+    <head>
+        <title>Day 16 | Drink Water</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            outline: none;
+            font-family: monospace;
+        }
+
+        body {
+            background-color: #3494e4;
+            color: #fff;
+            font-family: monospace;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        body > * {  
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        script {
+            display: none;
+        }
+
+        h1 {
+            margin: 5px 0 0;
+        }
+
+        h3 {
+            font-weight: 400;
+            margin: 10px 0;
+        }
+
+        .cup {
+            background-color: #fff;
+            border: 4px solid #144fc6;
+            color: #144fc6;
+            border-radius: 0 0 40px 40px;
+            height: 330px;
+            width: 150px;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .cup.cup-small {
+            height: 95px;
+            width: 50px;
+            border-radius: 0 0 15px 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            font-size: 14px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 5px;
+            transition: 0.3s ease;
+        }
+
+        .cup.cup-small.full {
+            background-color:#6ab3f8;
+            color: #fff;
+        }
+
+        .cups {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            width: 280px;
+        }
+
+        .remained {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex: 1;
+            transition: 0.3s ease;
+        }
+
+        .remained span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .remained small {
+            font-size: 12px;
+        }
+
+        .percentage {
+            background-color: #6ab3f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 30px;
+            height: 0;
+            transition: 0.3s ease;
+        }
+
+        .text {
+            text-align: center;
+            margin: 0 0 5px;
+        }
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/drink-water/-->
+        <div>
+            <h1>Verre d'eau</h1>
+            <h3>Stockage: 2 Litres</h3>
+
+            <div class="cup">
+            <div class="remained" id="remained">
+                <span id="liters"></span>
+                <small>Manquants</small>
+            </div>
+
+            <div class="percentage" id="percentage"></div>
+            </div>
+        </div>
+
+        <div>
+            <p class="text">Sélectionnez les fioles.</p>
+
+            <div class="cups">
+                <div class="cup cup-small">250 ml</div>
+                <div class="cup cup-small">250 ml</div>
+                <div class="cup cup-small">250 ml</div>
+                <div class="cup cup-small">250 ml</div>
+                <div class="cup cup-small">250 ml</div>
+                <div class="cup cup-small">250 ml</div>
+                <div class="cup cup-small">250 ml</div>
+                <div class="cup cup-small">250 ml</div>
+            </div>
+        </div>
+
+    </body>
+    <script>
+        const smallCups = document.querySelectorAll('.cup-small')
+const listers = document.getElementById('liters')
+const percentage = document.getElementById('percentage')
+const remained = document.getElementById('remained')
+
+updateBigCup()
+
+smallCups.forEach((cup, idx) => {
+    cup.addEventListener('click', () => highlightCups(idx))
+})
+
+function highlightCups(idx) {
+    if(smallCups[idx].classList.contains('full') && !smallCups[idx].nextElementSibling.classList.contains('full')) {
+        idx--
+    }
+
+    smallCups.forEach((cup, idx2) => {
+        if(idx2 <= idx) {
+            cup.classList.add('full')
+        } else {
+            cup.classList.remove('full')
+        }
+    })
+
+    updateBigCup()
+}
+
+function updateBigCup() {
+    const fullCups = document.querySelectorAll('.cup-small.full').length
+    const totalCups = smallCups.length
+
+    if(fullCups === 0) {
+        percentage.style.visibility = 'hidden'
+        percentage.style.height = 0
+    } else {
+        percentage.style.visibility = 'visible'
+        percentage.style.height = `${fullCups / totalCups * 330}px`
+        percentage.innerText = `${fullCups / totalCups * 100}%`
+    }
+
+    if(fullCups === totalCups) {
+        remained.style.visibility = 'hidden'
+        remained.style.height = 0
+    } else {
+        remained.style.visibility = 'visible'
+        listers.innerText = `${2 - (250 * fullCups / 1000)}L`
+    }
+}
+
+    </script>
+</html> 
