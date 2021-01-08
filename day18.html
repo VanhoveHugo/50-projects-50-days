@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <title>Day 18 | Background Slider</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <style>
+      * {
+        margin: 0;
+      }
+      body {
+        position: relative;
+      }
+      body::before {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        content: '';
+        background: rgba(0, 0, 0, .7);
+        z-index: 5;
+      }
+
+      main {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(25% 25%, 75% 25%, 75% 75%, 25% 75%);
+        z-index: 10;
+      }
+
+      main button {
+        position: absolute;
+        top: calc(50% - 25px);
+        left: 25%;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        color: #000;
+        cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+        z-index: 20;
+      }
+      button:last-child {
+        left: calc(75% - 50px);
+
+      }
+
+
+    </style>
+    <body>
+        <!--Template: https://50projects50days.com/projects/background-slider/-->
+        
+        <main>
+          <button><i class="fa fa-arrow-left prev"></i></button>
+          <button><i class="fa fa-arrow-right next"></i></button>
+        </main>
+    </body>
+    <script>
+        const image = [
+          "http://iwallpapers2.free.fr/images/Paysages/Hiver/Pont_en_hiver_superbe_paysage.jpg",
+          "https://i.pinimg.com/originals/15/05/a7/1505a796ee38433c10e9dca2db9e3a60.jpg",
+          "https://aws-cf.imdoc.fr/prod/photos/8/7/8/11763878/27364521/big-2736452162e.jpg?v=1"
+        ];
+        let idx = 0;
+        let main = document.querySelector('main');
+        let next = document.querySelector('.next');
+        let prev = document.querySelector('.prev');
+
+        next.addEventListener('click', () => {
+          if(idx === image.length - 1) {
+            idx = 0;
+          } else {
+            idx++;
+          }
+          update(idx);
+        })
+        prev.addEventListener('click', () => {
+          if(idx === 0) {
+            idx = image.length - 1;
+          } else {
+            idx--;
+          }
+          update(idx);
+        })
+
+        update(idx);
+        function update(i) {
+          document.body.style.background = `url('${image[i]}') no-repeat center center / cover`;
+          let v = Math.floor(Math.random() * Math.floor(2))
+          if(v === 0) {
+            document.body.animate([
+              {backgroundSize: "100vw 140vh"},
+              {backgroundSize: "100vw 120vh"}
+            ], {
+              duration: 2000
+            })
+          } else {
+            document.body.animate([
+              {backgroundSize: "100vw 100vh"},
+              {backgroundSize: "100vw 120vh"}
+            ], {
+              duration: 2000
+            })
+          }
+          document.body.style.animation = 'animation: fadeOut 2s forwards'
+          main.style.background = `url('${image[i]}') no-repeat center center /  100vw 120vh`;
+        }
+    </script>
+    
+</html> 
